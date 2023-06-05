@@ -1,6 +1,7 @@
 import os
 import io
 import function as func
+from PIL import Image
 from fastapi import FastAPI, UploadFile, File
 
 app = FastAPI()
@@ -27,19 +28,9 @@ async def predict_image(file: UploadFile = File(...)):
     image = Image.open(io.BytesIO(await file.read()))
     image = func.preprocess_image(image)
 
-    class_name, probability = predict(image)
+    class_name, probability = func.predict(image)
     # Return the predicted class
     return {class_name : probability}
-
-# @app.get('/predict')
-# async def predict_image(file: UploadFile = File(...)):
-#     # Read and preprocess the image
-#     image = Image.open(io.BytesIO(await file.read()))
-#     image = func.preprocess_image(image)
-
-#     class_name, probability = predict(image)
-#     # Return the predicted class
-#     return {class_name : probability}
 
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 80))
