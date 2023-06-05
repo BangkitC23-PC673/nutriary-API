@@ -31,16 +31,16 @@ async def predict_image(file: UploadFile = File(...)):
     # Return the predicted class
     return {class_name : probability}
 
-@app.get('/predict')
-async def predict_image(file: UploadFile = File(...)):
-    # Read and preprocess the image
-    image = Image.open(io.BytesIO(await file.read()))
-    image = func.preprocess_image(image)
+# @app.get('/predict')
+# async def predict_image(file: UploadFile = File(...)):
+#     # Read and preprocess the image
+#     image = Image.open(io.BytesIO(await file.read()))
+#     image = func.preprocess_image(image)
 
-    class_name, probability = predict(image)
-    # Return the predicted class
-    return {class_name : probability}
+#     class_name, probability = predict(image)
+#     # Return the predicted class
+#     return {class_name : probability}
 
 if __name__ == "__main__":
-	port = int(os.environ.get('PORT', 5000))
+	port = int(os.environ.get('PORT', 80))
 	run(app, host="0.0.0.0", port=port, timeout_keep_alive=1200)
