@@ -1,6 +1,7 @@
 import os
 import io
 import function as func
+from fastapi import FastAPI
 
 app = FastAPI()
 
