@@ -2,6 +2,7 @@ import os
 import io
 import function as func
 from PIL import Image
+from starlette.responses import FileResponse 
 from fastapi import FastAPI, UploadFile, File
 
 app = FastAPI()
@@ -13,6 +14,11 @@ app = FastAPI()
 @app.get('/')
 def main():
     return {'message': 'Welcome to Nutriary Model test API!'}
+
+
+@app.get("/documentation")
+async def read_index():
+    return FileResponse('doc/documentation.html')
  
 ## Defining path operation for /name endpoint
 #@app.get('/{name}')
@@ -32,18 +38,6 @@ async def predict_image(file: UploadFile = File(...)):
     class_name, probability = func.predict(image)
     # Return the predicted class
     return {class_name : probability}
-
-@app.get('/predict-get')
-async def predict_image(file: UploadFile = File(...)):
-    # Read and preprocess the image
-    content = await file.read()
-    image = Image.open(io.BytesIO(content))
-    image = func.preprocess_image(image)
-
-    class_name, probability = func.predict(image)
-    # Return the predicted class
-    return {class_name : probability}
-
 
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 8080))
