@@ -2,6 +2,7 @@ import os
 import io
 import function as func
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
