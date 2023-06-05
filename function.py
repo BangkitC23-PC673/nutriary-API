@@ -17,7 +17,9 @@ from PIL import Image
 import os
 import io
 
-model_dir = "models/94-stabil-di-test-model-train-1685467718.748879.h5"
+class_names = ['bakso', 'gado', 'rendang', 'sate']
+
+model_dir = "models/model-Bloss-1685804794.265851.h5"
 model = load_model(model_dir)
 
 def preprocess_image(image):
