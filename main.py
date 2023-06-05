@@ -1,13 +1,9 @@
 import os
 import io
 import function as func
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, UploadFile, File
 
 app = FastAPI()
-
-class Msg(BaseModel):
-    msg: str
 
 #@app.get("/")
 #async def root():
