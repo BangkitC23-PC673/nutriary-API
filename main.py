@@ -7,27 +7,18 @@ from fastapi import FastAPI, UploadFile, File
 
 app = FastAPI()
 
-#@app.get("/")
-#async def root():
-#    return {"message": "Welcome to the Food Vision API!"}
-
+# Defining path operation for root endpoint
 @app.get('/')
 def main():
     return {'message': 'Welcome to Nutriary Model test API!'}
 
 
+# Defining path operation for /documentation endpoint
 @app.get("/documentation")
 async def read_index():
-    return FileResponse('doc/documentation.html')
+    return FileResponse('doc/index.html')
  
-## Defining path operation for /name endpoint
-#@app.get('/{name}')
-#def hello_name(name : str):
-#    # Defining a function that takes only string as input and output the
-#    # following message.
-#    return {'message': f'Welcome to model test FastAPI!, {name}'}
-
-
+# Defining path operation for /predict endpoint
 @app.post('/predict')
 async def predict_image(file: UploadFile = File(...)):
     # Read and preprocess the image
