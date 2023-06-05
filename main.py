@@ -4,17 +4,8 @@ import function as func
 
 app = FastAPI()
 
-origins = ["*"]
-methods = ["*"]
-headers = ["*"]
-
-app.add_middleware(
-    CORSMiddleware, 
-    allow_origins = origins,
-    allow_credentials = True,
-    allow_methods = methods,
-    allow_headers = headers    
-)
+class Msg(BaseModel):
+    msg: str
 
 #@app.get("/")
 #async def root():
@@ -22,7 +13,7 @@ app.add_middleware(
 
 @app.get('/')
 def main():
-    return {'message': 'Welcome to nutriary model test FastAPI!'}
+    return {'message': 'Welcome to Nutriary Model test API!'}
  
 ## Defining path operation for /name endpoint
 #@app.get('/{name}')
