@@ -33,5 +33,5 @@ async def predict_image(file: UploadFile = File(...)):
     return {class_name : probability}
 
 if __name__ == "__main__":
-	port = int(os.environ.get('PORT', 80))
+	port = int(os.environ.get('PORT', 8080))
 	run(app, host="0.0.0.0", port=port, timeout_keep_alive=1200)
