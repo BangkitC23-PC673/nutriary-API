@@ -29,11 +29,14 @@ def preprocess_image(image):
     return image_array
 
 def predict(image):
-    # Make the prediction
-    prediction = model.predict(image)
-    predicted_class = np.argmax(prediction)
+    try:
+        # Make the prediction
+        prediction = model.predict(image)
+        predicted_class = np.argmax(prediction)
 
-    class_name = class_names[predicted_class]
-    probability = np.max(prediction) * 100
+        class_name = class_names[predicted_class]
+        probability = np.max(prediction) * 100
+    except Exception as e:
+        return {"error" : str(e)}
     
-    return class_name, probability
+    return {"class" : str(class_name), "probability" : probability}

@@ -23,12 +23,15 @@ async def read_index():
 async def predict_image(file: UploadFile = File(...)):
     # Read and preprocess the image
     content = await file.read()
-    image = Image.open(io.BytesIO(content))
-    image = func.preprocess_image(image)
+    try:
+        image = Image.open(io.BytesIO(content))
+        image = func.preprocess_image(image)
+    except Exception as e:
+        return {"error" : str(e)}
 
-    class_name, probability = func.predict(image)
+    response = func.predict(image)
     # Return the predicted class
-    return {"class" : str(class_name), "probability" : probability}
+    return response
 
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 8080))
