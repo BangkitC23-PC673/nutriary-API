@@ -40,7 +40,8 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-    "gado": 98.6698865890503
+    "class": "rendang",
+    "probability": 95.85497379302979
 }
 ```
 
