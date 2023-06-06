@@ -28,7 +28,7 @@ async def predict_image(file: UploadFile = File(...)):
 
     class_name, probability = func.predict(image)
     # Return the predicted class
-    return {"class" : class_name, "probability" : probability}
+    return {"class" : str(class_name), "probability" : probability}
 
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 8080))
